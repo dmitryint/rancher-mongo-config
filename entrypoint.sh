@@ -1,11 +1,12 @@
 #!/bin/bash
 
+CODENAME=$(awk -F"[)(]+" '/VERSION=/ {print $2}' /etc/os-release)
 # Installing dnsutils and jq
-#echo "deb http://http.debian.net/debian $(lsb_release -cs)-backports main" | tee /etc/apt/sources.list.d/$(lsb_release -cs)-backports.list > /dev/null
-#echo "deb http://security.debian.org/ $(lsb_release -cs)/updates main contrib non-free " | tee /etc/apt/sources.list.d/$(lsb_release -cs)-security.list > /dev/null
-#echo "deb-src http://security.debian.org/ $(lsb_release -cs)/updates main contrib non-free" | tee /etc/apt/sources.list.d/$(lsb_release -cs)-security.list > /dev/null
+echo "deb http://http.debian.net/debian ${CODENAME}-backports main" | tee /etc/apt/sources.list.d/${CODENAME}-backports.list > /dev/null
+echo "deb http://security.debian.org/ ${CODENAME}/updates main contrib non-free " | tee /etc/apt/sources.list.d/${CODENAME}-security.list > /dev/null
+echo "deb-src http://security.debian.org/ ${CODENAME}/updates main contrib non-free" | tee /etc/apt/sources.list.d/${CODENAME}-security.list > /dev/null
 apt-get -q update
-apt-get install -qqy dnsutils jq
+apt-get install -qqy dnsutils jq 
 
 # Check for lowest ID
 /opt/rancher/bin/lowest_idx.sh
