@@ -6,7 +6,7 @@ echo "deb http://http.debian.net/debian ${CODENAME}-backports main" | tee /etc/a
 echo "deb http://security.debian.org/ ${CODENAME}/updates main contrib non-free " | tee /etc/apt/sources.list.d/${CODENAME}-security.list > /dev/null
 echo "deb-src http://security.debian.org/ ${CODENAME}/updates main contrib non-free" | tee /etc/apt/sources.list.d/${CODENAME}-security.list > /dev/null
 apt-get -q update
-apt-get install -qqy dnsutils jq 
+apt-get install -qqy dnsutils jq curl
 
 # Check for lowest ID
 /opt/rancher/bin/lowest_idx.sh
